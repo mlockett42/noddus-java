@@ -8,14 +8,24 @@
 		{
 			"name": "Noddus-Post",
 			"request": {
-				"method": "GET",
+				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": ""
+					"raw": "{\"name\": \"Mark\", \"id\": 123}"
 				},
 				"url": {
-					"raw": ""
+					"raw": "127.0.0.1:8000/test",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"test"
+					]
 				},
 				"description": "Default post for noddus"
 			},
