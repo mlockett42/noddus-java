@@ -1,0 +1,16 @@
+version: '3.3'
+
+services:
+ mark-java:
+   build: .
+   image: mark-java
+
+   ports:
+     - "8000:8000"
+
+   volumes:
+     - .:/opt/project
+
+   command: /opt/project/hello.sh
+   stdin_open: true
+   tty: true
