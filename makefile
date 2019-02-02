@@ -1,4 +1,4 @@
-JFLAGS = -g
+JFLAGS = -g -cp '.:lib/json-20180813.jar'
 JC = javac
 .SUFFIXES: .java .class
 .java.class:
