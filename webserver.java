@@ -2,6 +2,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.InputStreamReader;
 import java.io.FileOutputStream;
+import java.io.FileNotFoundException;
 import java.net.InetSocketAddress;
 import java.nio.charset.StandardCharsets;
 
@@ -13,15 +14,39 @@ import org.json.JSONObject;
 
 import com.noddus.test.NoddusTestProto.NoddusTest;
 
+import java.util.TimerTask;
+
 class WebServer {
 
     public static void main(String[] args) throws Exception {
         System.out.println("Starting webserver");
+        protobuf_output = new FileOutputStream("/opt/project/output/proto.output");
+
         HttpServer server = HttpServer.create(new InetSocketAddress(8000), 0);
         server.createContext("/test", new MyHandler());
         server.setExecutor(null); // creates a default executor
         server.start();
+
+        java.util.Timer t = new java.util.Timer();
+        t.schedule(new TimerTask() {
+
+                    @Override
+                    public void run() {
+                      try {
+                        synchronized (protobuf_output) {
+                          protobuf_output.close();
+                          protobuf_output = new FileOutputStream("/opt/project/output/proto.output");
+                        }
+                      } catch (FileNotFoundException exception) {
+                        System.out.println("FileNotFoundException recreating proto.output");
+                      } catch (IOException exception) {
+                        System.out.println("IOException recreating proto.output");
+                      }
+                    }
+                }, 15000, 15000);
     }
+
+    static public FileOutputStream protobuf_output;
 
     static class MyHandler implements HttpHandler {
         @Override
@@ -67,9 +92,11 @@ class WebServer {
                 .setName(obj.getString("name"))
                 .setId(obj.getInt("id")).build();
               // Write the data to the disk
-              FileOutputStream output = new FileOutputStream("/opt/project/output/proto.output");
-              tp.writeTo(output);
-              output.close();
+              //FileOutputStream output = new FileOutputStream("/opt/project/output/proto.output");
+              synchronized (protobuf_output) {
+                tp.writeTo(protobuf_output);
+              }
+              //output.close();
               String response = "This is the response";
               t.sendResponseHeaders(200, response.length());
               OutputStream os = t.getResponseBody();
