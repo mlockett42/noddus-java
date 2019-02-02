@@ -1,6 +1,7 @@
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.InputStreamReader;
+import java.io.FileOutputStream;
 import java.net.InetSocketAddress;
 import java.nio.charset.StandardCharsets;
 
@@ -9,6 +10,8 @@ import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
 
 import org.json.JSONObject;
+
+import com.noddus.test.NoddusTestProto.NoddusTest;
 
 class WebServer {
 
@@ -60,6 +63,13 @@ class WebServer {
                 os.close();
                 return;
               }
+              NoddusTest tp = NoddusTest.newBuilder()
+                .setName(obj.getString("name"))
+                .setId(obj.getInt("id")).build();
+              // Write the data to the disk
+              FileOutputStream output = new FileOutputStream("/opt/project/output/proto.output");
+              tp.writeTo(output);
+              output.close();
               String response = "This is the response";
               t.sendResponseHeaders(200, response.length());
               OutputStream os = t.getResponseBody();

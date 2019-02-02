@@ -1,0 +1,11 @@
+syntax = "proto2";
+
+package noddusproto;
+
+option java_package = "com.noddus.test";
+option java_outer_classname = "NoddusTestProto";
+
+message NoddusTest {
+  required string name = 1;
+  required int32 id = 2;
+}

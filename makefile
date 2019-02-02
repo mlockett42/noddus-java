@@ -1,15 +1,29 @@
-JFLAGS = -g -cp '.:lib/json-20180813.jar'
+JFLAGS = -g -cp '.:protobuf_build/:lib/json-20180813.jar:lib/protobuf-java-3.6.1.jar'
 JC = javac
-.SUFFIXES: .java .class
+PC = protoc
+SRC_DIR = /opt/project
+DST_DIR = /opt/project/protobuf_build/
+PCFLAGS = -I=$(SRC_DIR) --java_out=$(DST_DIR)
+.SUFFIXES: .java .class .proto
 .java.class:
 	$(JC) $(JFLAGS) $*.java
+
+.proto.java:
+	$(PC) $(PCFLAGS) $(SRC_DIR)/$*.proto
 
 CLASSES = \
 	webserver.java
 
-default: classes
+PROTOBUFS = \
+	noddus.proto
 
-compile: $(CLASSES:.java=.class)
+default: compile
+
+protocompile: $(PROTOBUFS:.proto=.java)
+
+javacompile: $(CLASSES:.java=.class)
+
+compile: protocompile javacompile
 
 clean:
 	$(RM) *.class
