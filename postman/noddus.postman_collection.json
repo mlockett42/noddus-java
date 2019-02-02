@@ -1,0 +1,25 @@
+{
+	"info": {
+		"_postman_id": "a48b0c4b-8e73-4ece-86f6-8b1657741133",
+		"name": "noddus",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Noddus-Post",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": ""
+				},
+				"description": "Default post for noddus"
+			},
+			"response": []
+		}
+	]
+}
