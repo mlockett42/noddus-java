@@ -26,5 +26,5 @@ RUN apt-get update --quiet --yes && apt-get install --quiet --yes --force-yes ca
 # Also need
 EXPOSE 8000-8100
 WORKDIR /opt/project/
-ENTRYPOINT ["/opt/project/hello.sh"]
-CMD ["/opt/project/hello.sh"]
+ENTRYPOINT ["make"]
+CMD ["classes"]

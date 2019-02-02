@@ -11,6 +11,6 @@ services:
    volumes:
      - .:/opt/project
 
-   command: /opt/project/hello.sh
+   command: classes
    stdin_open: true
    tty: true
