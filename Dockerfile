@@ -19,7 +19,8 @@ RUN apt-get update && apt-get install -y software-properties-common
 RUN add-apt-repository --yes ppa:webupd8team/java
 RUN apt-get update --quiet --yes && apt-get install --quiet --yes --force-yes ca-certificates && \
   echo oracle-java7-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections && \
-  apt-get install --yes oracle-java8-installer
+  apt-get install --yes oracle-java8-installer && \
+  apt-get install --yes build-essential
 
 # Entrypoint
 # Also need
