@@ -24,7 +24,7 @@ RUN apt-get update --quiet --yes && apt-get install --quiet --yes --force-yes ca
 
 # Entrypoint
 # Also need
-EXPOSE 8000-8100
+EXPOSE 8000-8000
 WORKDIR /opt/project/
 ENTRYPOINT ["/opt/project/start.sh"]
-CMD ["classes"]
+CMD ["run"]

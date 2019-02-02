@@ -11,6 +11,6 @@ services:
    volumes:
      - .:/opt/project
 
-   command: classes
+   command: run
    stdin_open: true
    tty: true

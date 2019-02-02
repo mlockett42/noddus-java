@@ -5,11 +5,11 @@ JC = javac
 	$(JC) $(JFLAGS) $*.java
 
 CLASSES = \
-	firstprogram.java
+	webserver.java
 
 default: classes
 
-classes: $(CLASSES:.java=.class)
+compile: $(CLASSES:.java=.class)
 
 clean:
 	$(RM) *.class
