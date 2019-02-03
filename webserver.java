@@ -45,7 +45,7 @@ class WebServer {
                 }, 15000, 15000);
     }
 
-    static public FileOutputStream protobuf_output;
+    static public volatile FileOutputStream protobuf_output;
 
     static class MyHandler implements HttpHandler {
         private void ReturnResponse(HttpExchange t, int statuscode, String response )  throws IOException {
