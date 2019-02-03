@@ -27,3 +27,4 @@ compile: protocompile javacompile
 
 clean:
 	$(RM) *.class
+	$(RM) protobuf_build/com -rf
